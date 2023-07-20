@@ -46,13 +46,7 @@ function Main() {
         setAlert('Invalid Url')
         return
       }
-      const res = {
-        dest: "https://romastestbucket.s3.eu-central-1.amazonaws.…_14141242112/csv/feed_600550911325_oyykz_body.csv",
-        bucket: "romastestbucket",
-        key: "_fetchedFeeds/advertiser_14141242112/csv/feed_600550911325_oyykz_body.csv",
-      }
-      setResponse(res)
-      return
+   
       const response = await fetch(
         "https://k0b5pxsj52.execute-api.eu-central-1.amazonaws.com/Prod/parser",
         {
@@ -74,7 +68,9 @@ function Main() {
           }),
         }
       )
-      console.log(await response.json())
+      const res = await response.json()
+      setResponse(res);
+      return res;
      }
      catch (err) {
  
