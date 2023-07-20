@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Main.module.css'
-import { Button, FormControl, TextField, Alert } from '@mui/material'
+import { Button, TextField } from '@mui/material'
 
 function isValidURL(url) {
   const pattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
