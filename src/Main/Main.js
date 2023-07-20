@@ -24,6 +24,9 @@ function Main() {
     }
     const response = await fetch('https://k0b5pxsj52.execute-api.eu-central-1.amazonaws.com/Prod/parser', {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         "message": {
           "iat": 1647011695,
