@@ -73,6 +73,7 @@ function Main() {
       )
       const res = await response.json()
       setResponse(res);
+      setUrl("");
       return res;
      }
      catch (err) {
