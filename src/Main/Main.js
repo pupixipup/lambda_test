@@ -24,6 +24,7 @@ function Main() {
   const [alert, setAlert] = useState('')
   const [response, setResponse] = useState(null)
   const [loading, setLoading] = useState(0)
+  const [timer, setTimer] = useState({start: 0, end: 0})
 
   useEffect(() => {
     setError(false)
@@ -49,7 +50,7 @@ function Main() {
         return
       }
       setLoading(1)
-   
+      setTimer((val) => ({...val, start: Date.now()}))
       const response = await fetch(
         "https://k0b5pxsj52.execute-api.eu-central-1.amazonaws.com/Prod/parser",
         {
@@ -79,6 +80,7 @@ function Main() {
      catch (err) {
     setAlert(String(err))       
   } finally {
+    setTimer((val) => ({...val, end: Date.now()}))
     setLoading(0)
   }
   }
@@ -92,6 +94,7 @@ function Main() {
        </li>
      })}
 
+     const time =Math.floor((timer.end - timer.start) / 1000)
   return (
     <div className={styles.main}>
       {alert && <Alert severity="error">{alert}</Alert>}
@@ -107,6 +110,9 @@ function Main() {
           Submit
         </Button>
       </form>
+      {time > 0 && <h4 className={styles.timer}>
+      Seconds elapsed: {time}
+      </h4>}
       <div style={{opacity: loading}} className={styles.loading}>
       <img alt="loading circle" className={styles.loadingImage} src={svg} />
       </div>
