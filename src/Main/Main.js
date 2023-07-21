@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styles from "./Main.module.css"
 import { Button, TextField, Alert } from "@mui/material"
+import svg from '../assets/rolling.svg'
 
 function isValidURL(url) {
   const pattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
@@ -22,6 +23,7 @@ function Main() {
   const [error, setError] = useState(false)
   const [alert, setAlert] = useState('')
   const [response, setResponse] = useState(null)
+  const [loading, setLoading] = useState(0)
 
   useEffect(() => {
     setError(false)
@@ -39,13 +41,14 @@ function Main() {
   }, [alert])
 
   const submit = async (e) => {
-     try {
+    try {
       e.preventDefault()
       if (!isValidURL(url)) {
         setError(true)
         setAlert('Invalid Url')
         return
       }
+      setLoading(1)
    
       const response = await fetch(
         "https://k0b5pxsj52.execute-api.eu-central-1.amazonaws.com/Prod/parser",
@@ -73,8 +76,9 @@ function Main() {
       return res;
      }
      catch (err) {
- 
     setAlert(String(err))       
+  } finally {
+    setLoading(0)
   }
   }
 
@@ -102,6 +106,9 @@ function Main() {
           Submit
         </Button>
       </form>
+      <div style={{opacity: loading}} className={styles.loading}>
+      <img alt="loading circle" className={styles.loadingImage} src={svg} />
+      </div>
       <div className={styles.response}>
         <ul>
         {response && displayObject(response)}
