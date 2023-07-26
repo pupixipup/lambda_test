@@ -121,7 +121,7 @@ function Main() {
         {response && displayObject(response)}
         </ul>
         {response && response.dest && <Button
-        onClick={() => downloadURI(response.dest, 'output.csv')}
+        onClick={() => downloadURI(response.complete ?? response.dest, 'output.csv')}
         variant="outlined">
           Download
         </Button>}
