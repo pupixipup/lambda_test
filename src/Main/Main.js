@@ -53,7 +53,7 @@ function Main() {
       setTimer((val) => ({...val, start: Date.now()}))
       const response = await fetch(
         // "https://k0b5pxsj52.execute-api.eu-central-1.amazonaws.com/Prod/parser",
-        "https://trlwxzrq5m.execute-api.eu-central-1.amazonaws.com/Prod/feed-parse/"
+        "https://trlwxzrq5m.execute-api.eu-central-1.amazonaws.com/Prod/feed-parse",
         {
           method: "POST",
           headers: {
